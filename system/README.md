@@ -93,3 +93,65 @@ To open matching files in VS Code without using the mouse:
 > echo 'export FIF_OPEN_IN_EDITOR=1' >> ~/.zshrc && source ~/.zshrc
 > ```
 
+---
+
+### Starship Prompt
+
+A fast, customized, and informative shell prompt powered by [Starship](https://starship.rs/).
+
+#### Features Included in `starship.toml`
+- **Directory**: Colored in **bold blue** (shows 🔒 when read-only).
+- **Git Branch & Status**: Branch in **bold purple** with `` symbol; status in **bold red** showing modified (`!`), staged (`+`), untracked (`?`), ahead (`⇡`), or behind (`⇣`).
+- **Prompt Character**: Green `➜` for success, red `✗` on failure.
+- **Python / Conda**: Displays active conda environment (e.g. `(base)`) and python version.
+- **Command Duration & Time**: Shows execution time for long-running commands (`took 2s`) and timestamp (`06:22:35 PM`).
+
+#### Dependencies
+```bash
+# Install Starship prompt engine
+brew install starship
+
+# Install a Nerd Font (required for symbols/icons like , , 🐍, 🔒)
+brew install --cask font-fira-code-nerd-font
+```
+*(In iTerm2/Terminal, set your font to **FiraCode Nerd Font**)*
+
+#### Installation
+
+1. **Link the configuration file**:
+   ```bash
+   mkdir -p ~/.config
+   ln -sf "$(pwd)/system/starship.toml" ~/.config/starship.toml
+   ```
+
+2. **Enable in your shell**:
+   - For `zsh` (macOS default):
+     ```bash
+     echo 'eval "$(starship init zsh)"' >> ~/.zshrc && source ~/.zshrc
+     ```
+   - For `bash`:
+     ```bash
+     echo 'eval "$(starship init bash)"' >> ~/.bashrc && source ~/.bashrc
+     ```
+
+#### Optional: Terminal Extras
+
+To replicate the full terminal experience:
+
+```bash
+# 1. Autocompletion suggestions as you type
+brew install zsh-autosuggestions
+echo 'source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh' >> ~/.zshrc
+
+# 2. Colored file listing and grep
+cat <<'EOF' >> ~/.zshrc
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+alias ls='ls -G'
+alias grep='grep --color=auto'
+EOF
+
+source ~/.zshrc
+```
+
+
