@@ -71,11 +71,15 @@ fif --help                      # Show all options and keybindings
 #### Editor Integration (e.g., VS Code)
 To open matching files in VS Code without using the mouse:
 
-1. **Set VS Code as your editor** in `~/.zshrc` (or `~/.bashrc`):
-   ```bash
-   export EDITOR="code"
-   ```
-   *(Run `source ~/.zshrc` to reload)*
+1. **Set VS Code as your default editor**:
+   - For `zsh` (macOS default):
+     ```bash
+     echo 'export EDITOR="code"' >> ~/.zshrc && source ~/.zshrc
+     ```
+   - For `bash`:
+     ```bash
+     echo 'export EDITOR="code"' >> ~/.bashrc && source ~/.bashrc
+     ```
 
 2. **Open on selection**:
    - Run with `-e` to have `Enter` open the selected file in VS Code:
@@ -84,8 +88,8 @@ To open matching files in VS Code without using the mouse:
      ```
    - Or press `Ctrl-O` inside `fzf` at any time to immediately open the highlighted file.
 
-> **Tip**: If you want `fif` to **always** open files in your editor upon pressing `Enter` without needing `-e`, add to `~/.zshrc`:
+> **Tip**: If you want `fif` to **always** open files in your editor upon pressing `Enter` without needing to pass `-e`, run:
 > ```bash
-> export FIF_OPEN_IN_EDITOR=1
+> echo 'export FIF_OPEN_IN_EDITOR=1' >> ~/.zshrc && source ~/.zshrc
 > ```
 
