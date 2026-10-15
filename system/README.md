@@ -8,6 +8,11 @@ A collection of system configurations and CLI tools for a fast, productive termi
 
 An interactive CLI tool that searches for keywords inside **file body text** (rather than just filenames, as `fzf` typically does), leveraging `ripgrep` (`rg`), `fzf`, and `bat` for rich context previews.
 
+Automatically ignores noisy directories even with `--hidden` enabled:
+- **Python caches & environments**: `__pycache__/`, `.venv/`, `venv/`, `.env/`, `.pytest_cache/`, `.mypy_cache/`, `.ruff_cache/`, `.ipynb_checkpoints/`
+- **AI caches & histories**: `.claude/cache/`, `.claude/history/`, `.claude/sessions/`, `.codex/cache/`, etc. *(skills, prompts, and configs in `.claude/` and `.codex/` remain fully searchable!)*
+- **General**: `.git/`, `node_modules/`
+
 ### Dependencies
 ```bash
 brew install ripgrep fzf bat

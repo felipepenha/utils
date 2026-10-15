@@ -119,6 +119,28 @@ EOF
   local escaped_query
   escaped_query="${query//\'/\'\\\'\'}"
 
+  # Default directory and file patterns to ignore (Python envs/caches, AI caches/histories, etc.)
+  local rg_globs=(
+    --glob '!**/.git/**'
+    --glob '!**/__pycache__/**'
+    --glob '!**/.venv/**'
+    --glob '!**/venv/**'
+    --glob '!**/.env/**'
+    --glob '!**/.pytest_cache/**'
+    --glob '!**/.mypy_cache/**'
+    --glob '!**/.ruff_cache/**'
+    --glob '!**/.ipynb_checkpoints/**'
+    --glob '!**/node_modules/**'
+    --glob '!**/.claude/cache/**'
+    --glob '!**/.claude/history/**'
+    --glob '!**/.claude/sessions/**'
+    --glob '!**/.claude/projects/**'
+    --glob '!**/.codex/cache/**'
+    --glob '!**/.codex/history/**'
+    --glob '!**/.codex/sessions/**'
+    --glob '!**/.codex/logs/**'
+  )
+
   # Primary preview command leveraging rg with the requested flags:
   # --ignore-case --text --hidden --pretty --context
   local preview_cmd
@@ -135,7 +157,7 @@ EOF
 
   local selected_file
   selected_file="$(
-    rg --files-with-matches --no-messages --hidden --text --ignore-case -- "$query" "$target_path" 2>/dev/null | \
+    rg --files-with-matches --no-messages --hidden --text --ignore-case "${rg_globs[@]}" -- "$query" "$target_path" 2>/dev/null | \
     fzf --preview "$preview_cmd" \
         --preview-window="right:60%:wrap" \
         --header="$fzf_header" \
