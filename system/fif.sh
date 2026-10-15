@@ -131,14 +131,19 @@ EOF
     --glob '!**/.ruff_cache/**'
     --glob '!**/.ipynb_checkpoints/**'
     --glob '!**/node_modules/**'
+    --glob '!**/.tmp/**'
     --glob '!**/.claude/cache/**'
     --glob '!**/.claude/history/**'
     --glob '!**/.claude/sessions/**'
     --glob '!**/.claude/projects/**'
+    --glob '!**/.claude/.tmp/**'
+    --glob '!**/.claude/tmp/**'
     --glob '!**/.codex/cache/**'
     --glob '!**/.codex/history/**'
     --glob '!**/.codex/sessions/**'
     --glob '!**/.codex/logs/**'
+    --glob '!**/.codex/.tmp/**'
+    --glob '!**/.codex/tmp/**'
   )
 
   # Primary preview command leveraging rg with the requested flags:

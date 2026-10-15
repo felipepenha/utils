@@ -10,8 +10,8 @@ An interactive CLI tool that searches for keywords inside **file body text** (ra
 
 Automatically ignores noisy directories even with `--hidden` enabled:
 - **Python caches & environments**: `__pycache__/`, `.venv/`, `venv/`, `.env/`, `.pytest_cache/`, `.mypy_cache/`, `.ruff_cache/`, `.ipynb_checkpoints/`
-- **AI caches & histories**: `.claude/cache/`, `.claude/history/`, `.claude/sessions/`, `.codex/cache/`, etc. *(skills, prompts, and configs in `.claude/` and `.codex/` remain fully searchable!)*
-- **General**: `.git/`, `node_modules/`
+- **AI caches & histories**: `.claude/cache/`, `.claude/history/`, `.claude/sessions/`, `.codex/cache/`, `.codex/.tmp/`, etc. *(skills, prompts, and configs in `.claude/` and `.codex/` remain fully searchable!)*
+- **General**: `.git/`, `node_modules/`, `.tmp/`
 
 ### Dependencies
 ```bash
