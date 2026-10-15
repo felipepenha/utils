@@ -13,40 +13,25 @@ source ~/.zshrc
 
 ### Step 2: Install as a standalone command
 
-#### Option A: If cloning the repository (Recommended)
-Creating a symlink ensures that future `git pull` updates are immediately reflected without needing to reinstall:
+Link `fif` into your `$PATH` (e.g., `~/.local/bin`):
+
 ```bash
 mkdir -p ~/.local/bin
 ln -sf "$(pwd)/system/fif.sh" ~/.local/bin/fif
-```
-
-#### Option B: Standalone download (no clone needed)
-```bash
-mkdir -p ~/.local/bin
-curl -fsSL https://raw.githubusercontent.com/felipepenha/utils/main/system/fif.sh -o ~/.local/bin/fif
-chmod +x ~/.local/bin/fif
 ```
 
 ---
 
 ## Updating
 
-How you update depends on which installation option you chose:
+Whenever there is an update in the remote repository, simply pull the latest changes:
 
-### If you used Option A (Symlink from clone)
-Just pull the latest changes from the repository:
 ```bash
 cd /path/to/utils
 git pull
 ```
-Because `~/.local/bin/fif` is a symlink pointing directly to `system/fif.sh`, your command is **updated instantly** without any reinstall steps!
 
-### If you used Option B (Standalone curl download)
-Re-download the latest version:
-```bash
-curl -fsSL https://raw.githubusercontent.com/felipepenha/utils/main/system/fif.sh -o ~/.local/bin/fif
-chmod +x ~/.local/bin/fif
-```
+Because `~/.local/bin/fif` is a symlink pointing directly to `system/fif.sh`, your command is **updated instantly** without needing to re-link or reinstall!
 
 ---
 

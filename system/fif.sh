@@ -13,8 +13,6 @@
 #
 # Installation (standalone command):
 #   mkdir -p ~/.local/bin && ln -sf "$(pwd)/system/fif.sh" ~/.local/bin/fif
-#   # Or without cloning:
-#   # curl -fsSL <URL> -o ~/.local/bin/fif && chmod +x ~/.local/bin/fif
 #
 # Usage:
 #   fif [options] <search_query> [search_path]
