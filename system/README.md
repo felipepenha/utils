@@ -1,51 +1,33 @@
-# System
+# System Utilities
 
-## Installation
-
-### Step 1: Ensure `~/.local/bin` is in your `$PATH`
-
-On macOS, `~/.local/bin` is usually not in `$PATH` by default. Add it once to your `~/.zshrc` (or `~/.bashrc`):
-
-```bash
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-### Step 2: Install as a standalone command
-
-Link `fif` into your `$PATH` (e.g., `~/.local/bin`):
-
-```bash
-mkdir -p ~/.local/bin
-ln -sf "$(pwd)/system/fif.sh" ~/.local/bin/fif
-```
+A collection of system configurations and CLI tools for a fast, productive terminal workflow.
 
 ---
 
-## Updating
+## 1. `fif` (Find In Files)
 
-Whenever there is an update in the remote repository, simply pull the latest changes:
+An interactive CLI tool that searches for keywords inside **file body text** (rather than just filenames, as `fzf` typically does), leveraging `ripgrep` (`rg`), `fzf`, and `bat` for rich context previews.
 
+### Dependencies
 ```bash
-cd /path/to/utils
-git pull
+brew install ripgrep fzf bat
 ```
 
-Because `~/.local/bin/fif` is a symlink pointing directly to `system/fif.sh`, your command is **updated instantly** without needing to re-link or reinstall!
+### Installation
 
----
+1. **Ensure `~/.local/bin` is in your `$PATH`** (run once):
+   ```bash
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+   ```
+   *(For `bash`, replace `.zshrc` with `.bashrc`)*
 
-## Utilities
+2. **Link the executable**:
+   ```bash
+   mkdir -p ~/.local/bin
+   ln -sf "$(pwd)/system/fif.sh" ~/.local/bin/fif
+   ```
 
-### `fif` (Find In Files)
-Searches for keywords inside file contents (body text, rather than filenames) leveraging `ripgrep` (`rg`), `fzf`, and optionally `bat` for interactive syntax-highlighted previews.
-
-#### Dependencies
-- [`rg`](https://github.com/BurntSushi/ripgrep): `brew install ripgrep`
-- [`fzf`](https://github.com/junegunn/fzf): `brew install fzf`
-- [`bat`](https://github.com/sharkdp/bat) *(optional)*: `brew install bat`
-
-#### Usage
+### Usage
 ```bash
 fif [options] <search_query> [search_path]
 ```
@@ -53,22 +35,22 @@ fif [options] <search_query> [search_path]
 #### Examples
 ```bash
 fif "database_connection"       # Search across current directory
-fif "TODO" src/                 # Search in a specific path
+fif "TODO" src/                 # Search within a specific path
 fif -e "error_handler"          # Open selected file directly in $EDITOR
 fif -c 10 "function_name"       # Show 10 context lines (default: 5)
 fif --help                      # Show all options and keybindings
 ```
 
-#### Interactive Keybindings (inside `fzf`)
+### Interactive Keybindings (inside `fzf`)
 | Keybinding | Action |
 | --- | --- |
-| `Enter` | Select and print file path (or open in editor if `-e` was passed) |
+| `Enter` | Select and print file path (or open in editor if `-e` or `FIF_OPEN_IN_EDITOR=1` was set) |
 | `Ctrl-O` / `Ctrl-E` | Open highlighted file immediately in `$EDITOR` |
 | `Ctrl-B` | View full file with syntax highlighting (via `bat`) |
 | `Ctrl-R` | View matching lines with context (via `rg`) |
 | `Ctrl-/` | Toggle preview window |
 
-#### Editor Integration (e.g., VS Code)
+### Editor Integration (e.g., VS Code)
 To open matching files in VS Code without using the mouse:
 
 1. **Set VS Code as your default editor**:
@@ -93,20 +75,27 @@ To open matching files in VS Code without using the mouse:
 > echo 'export FIF_OPEN_IN_EDITOR=1' >> ~/.zshrc && source ~/.zshrc
 > ```
 
+### Updating `fif`
+Whenever there is an update in the remote repository, simply pull:
+```bash
+cd /path/to/utils && git pull
+```
+Because `~/.local/bin/fif` is a symlink pointing directly to `system/fif.sh`, your command is **updated instantly** without needing to re-link or reinstall!
+
 ---
 
-### Starship Prompt
+## 2. Starship Prompt
 
 A fast, customized, and informative shell prompt powered by [Starship](https://starship.rs/).
 
-#### Features Included in `starship.toml`
+### Features Included in `starship.toml`
 - **Directory**: Colored in **bold blue** (shows 🔒 when read-only).
 - **Git Branch & Status**: Branch in **bold purple** with `` symbol; status in **bold red** showing modified (`!`), staged (`+`), untracked (`?`), ahead (`⇡`), or behind (`⇣`).
 - **Prompt Character**: Green `➜` for success, red `✗` on failure.
 - **Python / Conda**: Displays active conda environment (e.g. `(base)`) and python version.
 - **Command Duration & Time**: Shows execution time for long-running commands (`took 2s`) and timestamp (`06:22:35 PM`).
 
-#### Dependencies
+### Dependencies
 ```bash
 # Install Starship prompt engine
 brew install starship
@@ -114,9 +103,9 @@ brew install starship
 # Install a Nerd Font (required for symbols/icons like , , 🐍, 🔒)
 brew install --cask font-fira-code-nerd-font
 ```
-*(In iTerm2/Terminal, set your font to **FiraCode Nerd Font**)*
+*(In your terminal or iTerm2 settings, select **FiraCode Nerd Font**)*
 
-#### Installation
+### Installation
 
 1. **Link the configuration file**:
    ```bash
@@ -134,8 +123,13 @@ brew install --cask font-fira-code-nerd-font
      echo 'eval "$(starship init bash)"' >> ~/.bashrc && source ~/.bashrc
      ```
 
-#### Optional: Terminal Extras
+### Updating Starship Configuration
+Since `~/.config/starship.toml` is symlinked to `system/starship.toml`, any updates pulled from git are applied immediately:
+```bash
+cd /path/to/utils && git pull
+```
 
+### Optional: Terminal Extras (Autocompletion & Colored `ls`)
 To replicate the full terminal experience:
 
 ```bash
@@ -153,5 +147,3 @@ EOF
 
 source ~/.zshrc
 ```
-
-
