@@ -100,10 +100,24 @@ A fast, customized, and informative shell prompt powered by [Starship](https://s
 # Install Starship prompt engine
 brew install starship
 
-# Install a Nerd Font (required for symbols/icons like , , 🐍, 🔒)
+# Install a Nerd Font (required for symbols/icons like , , , 🐍, 🔒)
 brew install --cask font-fira-code-nerd-font
 ```
-*(In your terminal or iTerm2 settings, select **FiraCode Nerd Font**)*
+
+### Configuring iTerm2 for Nerd Fonts
+Installing the font file alone is not enough; iTerm2 must be explicitly told to use it for symbols to render properly:
+
+1. **Restart iTerm2**: Fully quit (`Cmd + Q`) and re-open iTerm2 so it detects the newly installed font.
+2. **Open Settings**: Press `Cmd + ,`.
+3. **Select Profile Text Settings**: Navigate to **Profiles** → select your profile (e.g., **Default**) → click the **Text** tab.
+4. **Set Font**: Under **Font**, click the dropdown and select **FiraCode Nerd Font** (or **FiraCode NF**).
+   > **Tip**: If you prefer keeping another font for regular code/text, leave the main font as-is, check **"Use a different font for non-ASCII text"**, and select **FiraCode Nerd Font** there.
+5. **Verify icon rendering**:
+   ```bash
+   echo -e "Branch: \ue0a0  Stash: \uf01c"
+   ```
+   *(Both `` and `` should render cleanly without empty boxes or question marks).*
+
 
 ### Installation
 
